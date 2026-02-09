@@ -87,7 +87,7 @@ class Rating():
                     pass
 
                 polarity_r1 = -0.5 if self.r1_old > self.r2_old else 0.5
-                polarity_r1 = -0.5 if self.r1_old < self.r2_old else 0.5
+                polarity_r2 = -0.5 if self.r1_old < self.r2_old else 0.5
 
             case -1:
                 pass
@@ -108,14 +108,21 @@ class Rating():
         return tuple(rating_changes)
     
     def _calculate_multiplier(self) -> float:
-        return 1 if self.r_diff / self._magic_number_multi <= 1 else round((self.r_diff / (self._magic_number_multi * 1.25)), 2)
+        return 1 if self.r_diff / self._magic_number_multi <= 1 else round((self.r_diff / (self._magic_number_multi * 1.675)), 2)
         
     
     def apply_rating_changes(self) -> tuple[float, float]:
         return (
-            self.r1_old + self._rating_changes[0], self.r1_old + self._rating_changes[1]
+            round((self.r1_old + self._rating_changes[0]), 2), round((self.r2_old + self._rating_changes[1]), 2)
         )
 
-
+# region Tests
 rating1 = Rating(1500, 1200, 1)
-rating1 = Rating(1800, 1200, 2)
+rating2 = Rating(1800, 1200, 2)
+
+test_rating_1 = Rating(1500, 1200, 1)
+test_rating_2 = Rating(3000, 1200, 2)
+test_rating_3 = Rating(3000, 1200, 0)
+
+assert test_rating_1.r2_old > test_rating_1.new_ratings[1]
+# endregion

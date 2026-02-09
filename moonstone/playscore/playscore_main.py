@@ -13,7 +13,7 @@ class Playscore:
 
         self._scaling_pos = []
         self._scaling_neg = []
-        self.padding = 0.2531
+        self.padding = 1.9531
 
     def set_scaling(self, mode: Literal[1, -1], scaling: list[float]) -> list[float]:
 
@@ -47,7 +47,7 @@ class Playscore:
         return round((playscore_pos - playscore_neg + padding), 2)
     
 
-playscore = Playscore([16, 3], [15])
+playscore = Playscore([16, 3], [1])
 playscore.set_scaling(1, [1.235, 0.234])
 playscore.set_scaling(-1, [1.442])
 print(playscore.calculate_playscore())
