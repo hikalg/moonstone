@@ -1,6 +1,3 @@
-def main():
-    print("Hello from moonstone!")
+from moonstone import Rating
 
-
-if __name__ == "__main__":
-    main()
+new = Rating(1000, 1200, 2)
