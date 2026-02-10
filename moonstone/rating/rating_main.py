@@ -8,7 +8,7 @@ winner : winner of match.
 
 """
 
-# TODO: Internal formulae
+# TODO: Internal formulas
 
 from typing import Literal
 
@@ -34,7 +34,7 @@ class Rating:
         )
 
         # Magic numbers - control multiplier and scaling calculations
-        self._eff_x = 75
+        self._eff_x = 128
         self._eff_b = 24
 
         # Internal calculation results
@@ -42,7 +42,7 @@ class Rating:
         self.r_scaling = self._calculate_scaling()
         self.r_polarity = self._define_polarity()
         self.r_balance = self._calculate_balance()
-        self.r_multiplier = self._calculate_multiplier()
+        # self.r_multiplier = self._calculate_multiplier()
         self.r_change = self._calculate_change()
 
         # New ratings
@@ -50,9 +50,10 @@ class Rating:
         self.r1_new = new_ratings[0]
         self.r2_new = new_ratings[1]
 
+        # debug output - run on init
         if print_output == 1:
             print(
-                f"----------\nSTART OUTPUT\nr_old: {old_ratings}\nr_new: {new_ratings}\nr_change: {self.r_change}\nr_mean: {self.r_mean}\nr_scaling: {self.r_scaling}\nr_polarity: {self.r_polarity}\nr_balance: {self.r_balance}\nEND OUTPUT\n----------"
+                f"----------\nSTART OUTPUT\nr_old: {old_ratings}\nr_new: {new_ratings}\nr_change: {self.r_change}\nr_mean: {self.r_mean}\nr_scaling: {self.r_scaling}\nr_multiplier: {1}\nr_polarity: {self.r_polarity}\nr_balance: {self.r_balance}\nEND OUTPUT\n----------"
             )
 
     def _calculate_mean(self) -> float:
@@ -71,12 +72,12 @@ class Rating:
             return (0, 0)  # failsafe on division by zero
 
     def _calculate_scaling(self):
-        final_ratios = []
+        scaling = []
         ratio_mean = self._calculate_ratio_to_mean()
         ratio_opp = self._calculate_ratio_to_opp()
         for x in [0, 1]:
-            final_ratios.append(round((ratio_mean[x] / ratio_opp[x]), 2))
-        return tuple(final_ratios)
+            scaling.append(round((ratio_mean[x] / ratio_opp[x]), 2))
+        return tuple(scaling)
 
     def _define_polarity(self) -> tuple[float, float]:
         polarity_r1 = 0
@@ -102,7 +103,6 @@ class Rating:
         return (polarity_r1, polarity_r2)
 
     def _calculate_balance(self) -> float:
-
         return (
             round((self.r_diff / self._eff_b), 2)
             if self.r_diff / self._eff_b >= 20
@@ -114,21 +114,22 @@ class Rating:
         for x in [0, 1]:
             rating_changes.append(
                 round(
-                    self.r_multiplier
-                    * int((self.r_polarity[x] * self.r_scaling[x] * self.r_balance)),
+                    # self.r_multiplier
+                    int((self.r_polarity[x] * self.r_scaling[x] * self.r_balance)),
                     2,
                 )
             )
 
         return tuple(rating_changes)
-
-    def _calculate_multiplier(self) -> float:
-        return (
-            1
-            if self.r_diff / self._eff_x <= 1
-            else round((self.r_diff / (self._eff_x * 1.675)), 2)
-        )
-
+    
+    # TODO: FIX THE MULTIPLIER!!!!!!
+    # def _calculate_multiplier(self) -> float:
+    #     return (
+    #         1
+    #         if self.r_diff / self._eff_x <= 1
+    #         else round((self.r_diff / (self._eff_x * 1.675)), 2)
+    #     )
+    
     def apply_changes(self) -> tuple[float, float]:
         return (
             int(self.r1_old + self.r_change[0]),
