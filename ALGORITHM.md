@@ -11,7 +11,7 @@ This explanation covers version 1 of the algorithm. This logic may change with s
 * $r^1_{0}$ is old rating of player 1 (`r1_old`)
 * $r^2_{0}$ is old rating of player 2 (`r2_old`)
 
-**Without multiplier (v1):**
+**Without multiplier (v1):**\
 $$
 r = r_{0} + psb = r_{0} + p_1 \times \dfrac{r_{0}}{\bar{r_{0}}} \times \dfrac{|r_{0} - \neg r_{0}|}{24}
 $$
