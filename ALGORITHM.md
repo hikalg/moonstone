@@ -16,10 +16,10 @@ Sydney, Australia
 * $r^1_{0}$ is old rating of player 1 (`r1_old`)
 * $r^2_{0}$ is old rating of player 2 (`r2_old`)
 
-**Without multiplier (v1):**
-$$
+**Without multiplier (v1):**\
+```math
 r = r_{0} + psb = r_{0} + p_1 \times \dfrac{r_{0}}{\bar{r_{0}}} \times \dfrac{|r_{0} - \neg r_{0}|}{24}
-$$
+```
 wheras:
 * $r$ is the new rating (`r_new`)
 * $r_{0}$ is the old rating (`r_old`)
@@ -27,32 +27,33 @@ wheras:
 * $s$ is the rating scaling (`r_scaling`)
 * $b$ is the rating base change/balance (`r_balance`)
 
-**With multiplier (v1x):**
-$$
+**With multiplier (v1x):**\
+```math
 r = r_{0} + mpsb
-$$
+```
 wheras:
 * $m$ is the multiplier of the rating change. Multiplier is user defined.
 * all other values are explained above.
 
-**Determining $w$ (`winner`):**
-$$
+**Determining $w$ (`winner`):**\
+```math
 w = 
 \begin{cases}
     \quad -1 & \quad \text{when no result}\\
     \quad 0 & \quad \text{when a tie occurs}\\
-    \quad 1 & \quad \text{when $r^{1}$ wins}\\
-    \quad 2 & \quad \text{when $r^{2}$ wins}
+    \quad 1 & \quad \text{when} \space r^{1} \text{wins}\\
+    \quad 2 & \quad \text{when} \space r^{2} \text{wins}
 \end{cases}
-$$
+```
 
 ## Detailed Explanation
 ### Determining Scaling (`r_scaling`)
 1. 
    Compute the mean of both players' old ratings - `r1_old` and `r2_old`:
-  $$
+   
+  ```math
   \bar{r_{0}} = \dfrac{r^1_{0} + r^2_{0}}{2}
-  $$
+  ```
 
 2. 
    Compute the ratio of the opponent's rating against the mean. This will be the `r_scaling` value of that player.
@@ -60,25 +61,29 @@ $$
    For player 1, use `r2_old` ($r^2_{0}$). For player 2, use `r1_old` ($r^1_{0}$).
 
    $$
-   s_1 = \dfrac{r^2_{0}}{\bar{r_{0}}} \quad \quad s_2 = \dfrac{r^1_{0}}{\bar{r_{0}}}
+   s_{1} = \frac{r_{0}}{\bar{r_{0}}}
+   $$
+
+   $$
+   s_{2} = \frac{r_{0}}{\bar{r_{0}}}
    $$
 
 ### Determining Balance (`r_balance`)
 
 3. Compute the rating change balance as follows:
    
-   $$
+   ```math
    b = 
    \begin{cases}
         \quad \dfrac{|r^1_{0} - r^2_{0}|}{24} \qquad \text{when} \quad |r^1_{0} - r^2_{0}| > 24 \\
         \quad {24} \quad \qquad \text{when}\quad |r^1_{0} - r^2_{0}| \le 24 \\
    \end{cases}
-   $$
+   ```
 
 ### Determining Polarity (`r_polarity`)
 
 4. Calculate the polarity of player 1:
-   $$
+   ```math
    p_1 = 
    \begin{cases}
      \quad 1 \space\quad\qquad \text{when} \quad w = 1 \\
@@ -87,10 +92,10 @@ $$
      \quad -\dfrac{1}{2} \space\qquad \text{when} \quad w = 0 \quad \text{and} \quad r^1_{0} > r^2_{0}\\
      \quad 0 \quad\qquad\space \text{when} \quad w = -1
    \end{cases}
-   $$
+   ```
 
 5. Calculate the polarity of player 2:
-   $$
+   ```math
    p_2 = 
    \begin{cases}
      \quad 1 \space\quad\qquad \text{when} \quad w = 2 \\
@@ -99,26 +104,27 @@ $$
      \quad -\dfrac{1}{2} \space\qquad \text{when} \quad w = 0 \quad \text{and} \quad r^1_{0} < r^2_{0}\\
      \quad 0 \quad\qquad\space \text{when} \quad w = -1
    \end{cases}
-   $$
+   ```
 
 ### Computing Rating Change `r_change`
 
-$$
+```math
 \Delta{r}_1 = r^1_{0} + p_1 \times \dfrac{r^2_{0}}{\bar{r_{0}}} \times \dfrac{|r^1_{0} - r^2_{0}|}{24}
-$$
-$$
+```
+
+```math
 \Delta{r}_2 = r^2_{0} + p_2 \times \dfrac{r^1_{0}}{\bar{r_{0}}} \times \dfrac{|r^1_{0} - r^2_{0}|}{24}
-$$
+```
 
 ### Apply Rating Change (`apply_changes()`)
 
-$$
+```math
 r_1 = r^1_{0} + \Delta{r}_1 = r^1_{0} + p_1 \times \dfrac{r^2_{0}}{\bar{r_{0}}} \times \dfrac{|r^1_{0} - r^2_{0}|}{24}
-$$
+```
 
-$$
+```math
 r_2 = r^2_{0} + \Delta{r}_2 = r^2_{0} + p_1 \times \dfrac{r^1_{0}}{\bar{r_{0}}} \times \dfrac{|r^1_{0} - r^2_{0}|}{24}
-$$
+```
 
 # Licence
 MIT Licence.
