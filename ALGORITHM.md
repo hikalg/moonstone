@@ -61,11 +61,11 @@ w =
    For player 1, use `r2_old` ($r^2_{0}$). For player 2, use `r1_old` ($r^1_{0}$).
 
    $$\
-   s_{1} = \frac{r_{0}^2}{\bar{r_{0}}}
+   s_{1} = \frac{r_{0}^2}{\bar{r_{0}}}\
    $$
 
    $$\
-   s_{2} = \frac{r_{0}^1}{\bar{r_{0}}}
+   s_{2} = \frac{r_{0}^1}{\bar{r_{0}}}\
    $$
 
 ### Determining Balance (`r_balance`)
