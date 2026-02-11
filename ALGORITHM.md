@@ -36,8 +36,8 @@ w =
 \begin{cases}
     \quad -1 & \quad \text{when no result}\\
     \quad 0 & \quad \text{when a tie occurs}\\
-    \quad 1 & \quad \text{when $r^{1}$ wins}\\
-    \quad 2 & \quad \text{when $r^{2}$ wins}
+    \quad 1 & \quad \text{when} \space r^{1} \text{wins}\\
+    \quad 2 & \quad \text{when} \space r^{2} \text{wins}
 \end{cases}
 ```
 
