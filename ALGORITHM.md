@@ -45,7 +45,7 @@ w =
 ### Determining Scaling (`r_scaling`)
 1. 
    Compute the mean of both players' old ratings - `r1_old` and `r2_old`:
-```math
+  ```math
   \bar{r_{0}} = \dfrac{r^1_{0} + r^2_{0}}{2}
   ```
 
