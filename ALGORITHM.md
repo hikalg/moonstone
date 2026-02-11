@@ -44,7 +44,8 @@ w =
 ## Detailed Explanation
 ### Determining Scaling (`r_scaling`)
 1. 
-   Compute the mean of both players' old ratings - `r1_old` and `r2_old`:\
+   Compute the mean of both players' old ratings - `r1_old` and `r2_old`:
+   
   ```math
   \bar{r_{0}} = \dfrac{r^1_{0} + r^2_{0}}{2}
   ```
@@ -52,7 +53,7 @@ w =
 2. 
    Compute the ratio of the opponent's rating against the mean. This will be the `r_scaling` value of that player.
    
-   For player 1, use `r2_old` ($r^2_{0}$). For player 2, use `r1_old` ($r^1_{0}$).\
+   For player 1, use `r2_old` ($r^2_{0}$). For player 2, use `r1_old` ($r^1_{0}$).
 
    ```math
    s_1 = \dfrac{r^2_{0}}{\bar{r_{0}}} \quad \quad s_2 = \dfrac{r^1_{0}}{\bar{r_{0}}}
