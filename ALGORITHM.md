@@ -6,6 +6,7 @@ This explanation covers version 1 of the algorithm. This logic may change with s
 
 ## Author
 Everest Luong, Macquarie University
+
 Sydney, Australia
 
 ## Summary
