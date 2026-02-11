@@ -4,6 +4,10 @@ This explains the mathematical logic of the Moonstone skill rating algorithm.
 
 This explanation covers version 1 of the algorithm. This logic may change with subsequent versions.
 
+## Author
+Everest Luong, Macquarie University
+Sydney, Australia
+
 ## Summary
 **Player symbols:**
 * $r^1$ is new rating of player 1 (`r1_new`). This also indicates player 1 in general.
